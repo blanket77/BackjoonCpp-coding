@@ -18,5 +18,6 @@ int main()
     }
 
     cout << dp[num]%10007;
+
     return 0;
 }
