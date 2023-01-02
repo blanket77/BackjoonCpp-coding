@@ -44,6 +44,18 @@
         "xutility": "cpp",
         "stack": "cpp",
         "deque": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "array": "cpp",
+        "*.tcc": "cpp",
+        "clocale": "cpp",
+        "cstdarg": "cpp",
+        "cwctype": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp",
+        "memory_resource": "cpp",
+        "optional": "cpp",
+        "string_view": "cpp",
+        "fstream": "cpp",
+        "sstream": "cpp"
     }
 }
