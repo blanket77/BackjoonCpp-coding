@@ -1,87 +1,48 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#define MAX 1001
+#include <cmath>
 
 using namespace std;
+bool visted[236197] = {false, };
 
-int N, result = 0; // N은 정점개수, result는 순열 사이클 개수
-bool map[MAX][MAX]; //인접행렬
-bool visted[MAX];
-bool cycle[MAX];
+int abc(int A, int P){
+    int sum = pow(A % 10, P);
+    while((A/10)){
+        A/=10;
+        sum += pow(A % 10, P);
+    }
 
-void reset();
-void DFS(int V);
-void DFS_cyc(int V);
+    return sum;
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-
-    int num;
-    cin >> num;
-
-    vector<int> vec;
-    for(int i = 0 ; i < num; i++){
-
-        int a;
-        cin >> N ;
-
-
-        vec.erase(vec.begin(), vec.end());
-        reset();
-
-        for(int i = 0 ; i < N ; i++){
-            cin >> a;
-            vec.push_back(a);
-        }
-
-        int b;
-        for(int i = 0; i < N ; i++){
-            b = vec[i];
-            map[i+1][b] = true; 
-        } // 인접행렬
-
-        for(int i = 1 ; i <= N ; i++){
-            DFS(i);
-        }
-
-        cout << result <<"\n";
     
-    }
+    int A, P;
+    cin >> A >> P;
+
+    int S = A;
+    while(!visted[S]){
+        visted[S] = true;
+        S = abc(S, P);    
+    }    
+
+    int rem = S;
+
+ 
+    fill(visted, visted+236197, false);
+    
+    visted[rem] = true;
+    S = A;
+    int cnt = 0;
+    while(!visted[S]){
+        cnt++;
+        visted[S] = true;
+        S = abc(S, P);    
+    }   
+
+    cout << cnt << "\n";
+
     return 0;
-}
-
-void reset(){
-    for(int i = 1 ; i <= N; i++){
-        result = 0;
-        visted[i] = false;
-        cycle[i] = false;
-        for(int j = 1 ; j <= N; j++){
-            map[i][j] = false;
-        }
-    }
-}
-
-void DFS(int V){
-    visted[V] = true;
-    for(int i = 1 ; i <= N; i++){
-        if(visted[i] == true && map[V][i] == true && cycle[i] == false){
-            result++;
-            DFS_cyc(V);
-        }
-        else if(visted[i] == false && map[V][i] == true && cycle[i] == false){
-            DFS(i);
-        }
-    }
-}
-
-void DFS_cyc(int V){
-    cycle[V] = true;
-    for(int i = 1 ; i <= N; i++){
-        if(cycle[i] == false && map[V][i] == true){
-            DFS_cyc(i);
-        }
-    }
 }
