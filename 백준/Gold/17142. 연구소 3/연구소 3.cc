@@ -11,7 +11,7 @@ int dx[] = {0, 0, 1, -1};
 int dy[] = {1, -1, 0, 0};
 int temp[51][51]; // 각 셀까지 도달하는 시간 (-1이면 아직 도달하지 않음)
 vector<pair<int, int>> virus_pos;
-int min_ans = 987654321; 
+int min_ans = 10000; 
 
 // 입력 및 초기화: 빈 칸은 0, 벽은 1, 바이러스(초기 비활성)는 2 → 내부적으로 -1로 표시
 void inputAndInit(){
@@ -94,7 +94,7 @@ int main(){
     inputAndInit();
     get_virus_map_and_day(0, 0);
     
-    if(min_ans == 987654321)
+    if(min_ans == 10000)
         cout << -1 << "\n";
     else
         cout << min_ans << "\n";
